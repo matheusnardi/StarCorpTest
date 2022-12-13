@@ -1,6 +1,7 @@
-// Interação com a API
+// Interação com a API de USUÁRIOS
 
 angular.module("User").factory("UserFactory", function($q, $http){
+    var chave = '';
     return {
         listAll: function(){
             var promessa = $q.defer();
@@ -8,7 +9,7 @@ angular.module("User").factory("UserFactory", function($q, $http){
             $http({
                 method: "GET",
                 url: "https://www.selida.com.br/avaliacaotecnica/api/Pessoas/GetAll",
-                headers: {'chave': '6447450C-FCB7-461D-A8A1-AAD083E452DF'}
+                headers: {'chave': chave}
               })
             .then(function(result){
                 var allUsers = [];
@@ -31,7 +32,7 @@ angular.module("User").factory("UserFactory", function($q, $http){
             $http({
                 method: "GET",
                 url: "https://www.selida.com.br/avaliacaotecnica/api/Pessoas/"+pessoaId,
-                headers: {'chave': '6447450C-FCB7-461D-A8A1-AAD083E452DF'}
+                headers: {'chave': chave}
               })
             .then(function(result){
                 var user = result.data.data;
@@ -47,7 +48,7 @@ angular.module("User").factory("UserFactory", function($q, $http){
             return $http({
                 method: "POST",
                 url: "https://www.selida.com.br/avaliacaotecnica/api/Pessoas",
-                headers: {'chave': '6447450C-FCB7-461D-A8A1-AAD083E452DF'},
+                headers: {'chave': chave},
                 data: user
               });
         },
@@ -56,7 +57,7 @@ angular.module("User").factory("UserFactory", function($q, $http){
             return $http({
                 method: "PUT",
                 url: "https://www.selida.com.br/avaliacaotecnica/api/Pessoas/"+pessoaId,
-                headers: {'chave': '6447450C-FCB7-461D-A8A1-AAD083E452DF'},
+                headers: {'chave': chave},
                 data: user
               });
         },
@@ -65,7 +66,7 @@ angular.module("User").factory("UserFactory", function($q, $http){
             return $http({
                 method: "DELETE",
                 url: "https://www.selida.com.br/avaliacaotecnica/api/Pessoas/"+pessoaId,
-                headers: {'chave': '6447450C-FCB7-461D-A8A1-AAD083E452DF'}
+                headers: {'chave': chave}
             });
         }
     };
